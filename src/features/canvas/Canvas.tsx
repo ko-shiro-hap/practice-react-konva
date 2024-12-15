@@ -1,11 +1,17 @@
 "use client"
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Stage, Layer, Rect, Text, Circle, Line } from 'react-konva';
 
 export default function Canvas() {
-  return (
-    <Stage width={1000} height={1000}>
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  return isMounted ? (
+    <Stage width={500} height={500}>
       <Layer>
         <Text text="Some text on canvas" fontSize={15} />
         <Rect
@@ -30,6 +36,7 @@ export default function Canvas() {
         />
       </Layer>
     </Stage>
+  ) : (
+    <div>Loading...</div>
   );
 }
-
